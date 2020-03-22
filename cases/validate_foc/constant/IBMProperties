@@ -1,0 +1,74 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     3.2                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      setParticles;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+IBModel
+{
+    model		directForcing;
+    multiDirForcingIter	0;
+    gradPField		0;
+    gradPDir		horizontal;
+    IBObjects
+    {
+        particle1
+        {
+            type		IBParticle;
+            CG			(0 0 0.05);
+            radius		0.15;
+            movable		no;
+            rho			2000;
+	    motions
+            {
+                fixedLinearMotion
+                {U (4 0 0);}
+            }
+            calcRepulsive	no;
+            epsilonP		1e-05;
+            epsilonW		1e-05;
+
+        }
+    }
+}
+IBObjects
+{
+    particle1
+    {
+        type                IBParticle;
+        CG                  (0 0 0.05);
+        radius              0.15;
+        movable             no;
+        rho                 2000;
+        motions
+        {
+            fixedLinearMotion
+            {U (4 0 0);}
+        }
+            calcRepulsive       no;
+            epsilonP            1e-05;
+            epsilonW            1e-05;
+    }
+}
+
+writeData
+{
+    writeInterval       5;
+    writeLagrPoints	no;
+    writeShadPoints	no;
+    writeLagrForces	no;
+    writeObjVTU		no;
+    writeIBForce	no;
+    writeObjData	no;
+}
+
+// ************************************************************************* //
