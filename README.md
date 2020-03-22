@@ -3,7 +3,7 @@
 ### Immersed Boundary Library in OpenFOAM for fluid-structure interaction simulations
 
 Resolved:
-16/3: Add flowCondition class
+16/3: Add flowCondition class  
 21/3: Remove IBObjectRegistry class.
 
 Remaining Issues:
