@@ -9,7 +9,6 @@
 #ifndef IBParticle_H
 #define IBParticle_H
 
-#include "dynamicFvMesh.H"
 #include "IBObject.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -27,8 +26,6 @@ class IBParticle
 {
 
 		const scalar PI;
-
-		dynamicFvMesh& mesh_;
 
 		eulerMesh& emesh_;
 
@@ -129,7 +126,7 @@ public:
 		IBParticle
 		(	
 			const word& typeName,
-			dynamicFvMesh& mesh,
+			// dynamicFvMesh& mesh,
 			eulerMesh& emesh,
 			const dictionary& dict
 		);

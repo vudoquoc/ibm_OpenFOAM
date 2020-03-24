@@ -2,7 +2,6 @@
 #define fixedDP_H
 
 #include "flowCondition.H"
-#include "dynamicFvMesh.H"
 
 namespace Foam
 {
@@ -12,7 +11,7 @@ class fixedDP
     public flowCondition
 {
 
-    dynamicFvMesh& mesh_;
+    eulerMesh& emesh_;
 
     scalar dPdx_;
     
@@ -26,7 +25,7 @@ public:
     //- Constructor
         fixedDP
         (
-            dynamicFvMesh& mesh,
+            eulerMesh& emesh,
             const dictionary& dict
         );
 

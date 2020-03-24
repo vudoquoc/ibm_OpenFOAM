@@ -22,14 +22,12 @@ namespace Foam
 Foam::modifiedNewton::modifiedNewton
 (
     word typeName,
-	dynamicFvMesh& mesh,
     eulerMesh& emesh,
     PtrList<IBObject>& ibo,
     autoPtr<IBModel>& ibmodelPtr
 )
 :
-    IBMotionSolver(typeName, mesh, emesh, ibo, ibmodelPtr),
-	mesh_(mesh),
+    IBMotionSolver(typeName, emesh, ibo, ibmodelPtr),
     emesh_(emesh),
     ibo_(ibo),
     ibmodelPtr_(ibmodelPtr)
@@ -57,9 +55,9 @@ void  Foam::modifiedNewton::moveObjects()
                 }
             }
             
-            const volVectorField& U = mesh_.lookupObject<volVectorField>("U");
+            const volVectorField& U = emesh_.mesh().lookupObject<volVectorField>("U");
             const volVectorField& Uold = U.oldTime();
-            const scalar dT = mesh_.time().deltaTValue(); 
+            const scalar dT = emesh_.mesh().time().deltaTValue(); 
             vector volIntegralU_ 
             = 
                 (
@@ -114,7 +112,7 @@ Foam::vector Foam::modifiedNewton::volIntegralRxU
     const volVectorField& U
 )
 {
-    const volVectorField& cc = mesh_.C();
+    const volVectorField& cc = emesh_.mesh().C();
 
     vector IRxU(vector::zero);
 
@@ -135,9 +133,9 @@ Foam::vector Foam::modifiedNewton::volIntegralRxU
 
 Foam::scalar Foam::modifiedNewton::volFraction(IBObject& ibobj, label cellID)
 {
-    const faceList& ff = mesh_.faces();
-    const pointField& pp = mesh_.points();
-    const cell& cc = mesh_.cells()[cellID];
+    const faceList& ff = emesh_.mesh().faces();
+    const pointField& pp = emesh_.mesh().points();
+    const cell& cc = emesh_.mesh().cells()[cellID];
     pointField cellVertices = cc.points(ff, pp);
 
     IBParticle& ibp = refCast<IBParticle>(ibobj);
@@ -172,7 +170,7 @@ Foam::scalar Foam::modifiedNewton::LevelSetFunc
 	point c
 )
 {
-	if(mesh_.nGeometricD() == 2)
+	if(emesh_.mesh().nGeometricD() == 2)
 	{
 	    return 
 	    (

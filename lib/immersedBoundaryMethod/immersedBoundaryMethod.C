@@ -31,7 +31,6 @@ void Foam::immersedBoundaryMethod::createObjects(const dictionary& dict)
                 IBObject::New 
                 (
                     iter().keyword(),
-                    mesh_,
                     emesh_,
                     iter().dict()
                 )
@@ -58,11 +57,10 @@ Foam::immersedBoundaryMethod::immersedBoundaryMethod
         	IOobject::NO_WRITE
 		)
 	),
-	mesh_(mesh),
 	emesh_(mesh)
 {
 	// Create flow condition for microchannels
-	flowConditionPtr_ = flowCondition::New(mesh_,subDict("flowCondition"));
+	flowConditionPtr_ = flowCondition::New(emesh_,subDict("flowCondition"));
 
 	// Create immersed objects
 	createObjects(subDict("IBObjects"));
@@ -70,7 +68,6 @@ Foam::immersedBoundaryMethod::immersedBoundaryMethod
 	// Create immersed boundary model
 	modelPtr_  = IBModel::New
 				 (
-					mesh_, 
 					emesh_, 
 					subDict("IBModel"), 
 					objects_
@@ -80,7 +77,6 @@ Foam::immersedBoundaryMethod::immersedBoundaryMethod
 	motionSolverPtr_ = IBMotionSolver::New
 				 (
 					subDict("IBModel").lookup("motionSolver"), 
-					mesh_, 
 					emesh_, 
 					objects_, 
 					modelPtr_

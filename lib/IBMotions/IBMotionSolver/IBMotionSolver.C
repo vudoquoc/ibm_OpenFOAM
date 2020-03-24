@@ -21,7 +21,6 @@ namespace Foam
 Foam::IBMotionSolver::IBMotionSolver
 (
 	word typeName,
-    dynamicFvMesh& mesh, 
     eulerMesh& emesh,
     PtrList<IBObject>& ibo,
     autoPtr<IBModel>& ibmodelPtr
@@ -74,7 +73,6 @@ Foam::vector Foam::IBMotionSolver::objMutualRepulsive
 Foam::autoPtr<Foam::IBMotionSolver> Foam::IBMotionSolver::New
 (
 	word typeName,
-    dynamicFvMesh& mesh,
     eulerMesh& emesh,
     PtrList<IBObject>& ibo,
     autoPtr<IBModel>& ibmodelPtr
@@ -97,7 +95,7 @@ Foam::autoPtr<Foam::IBMotionSolver> Foam::IBMotionSolver::New
 			<< exit(FatalError);
 	}
 	
-	return autoPtr<IBMotionSolver>(cstrIter()(typeName, mesh, emesh, ibo, ibmodelPtr));
+	return autoPtr<IBMotionSolver>(cstrIter()(typeName, emesh, ibo, ibmodelPtr));
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

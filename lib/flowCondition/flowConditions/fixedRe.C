@@ -27,12 +27,12 @@ void Foam::fixedRe::initiateDPdx()
 // ------------------------------- Constructor ----------------------------- //
 Foam::fixedRe::fixedRe
 (
-    dynamicFvMesh& mesh,
+    eulerMesh& emesh,
     const dictionary& dict
 )
 :
-    flowCondition(mesh, dict),
-    mesh_(mesh),
+    flowCondition(emesh, dict),
+    emesh_(emesh),
     Reynolds_(readScalar(dict.lookup("value"))),
     dPdx_(0),
     Dh_(readScalar(dict.lookup("Dh"))),
@@ -47,8 +47,8 @@ Foam::fixedRe::fixedRe
         IOobject
         (
             "transportProperties",
-            mesh_.time().constant(),
-            mesh_,
+            emesh_.mesh().time().constant(),
+            emesh_.mesh(),
             IOobject::MUST_READ,
             IOobject::NO_WRITE
         )
@@ -63,9 +63,9 @@ Foam::fixedRe::fixedRe
 
     nu_ = nutmp.value();
 
-    forAll(mesh.boundaryMesh(), patchI)
+    forAll(emesh_.mesh().boundaryMesh(), patchI)
     {
-        const polyPatch& pp = mesh_.boundaryMesh()[patchI];
+        const polyPatch& pp = emesh_.mesh().boundaryMesh()[patchI];
         if (isA<cyclicPolyPatch>(pp))
         {
             addPressureGradientField_ = true;
@@ -86,9 +86,9 @@ void Foam::fixedRe::correctDPdx()
 {
     Info<<"Correcting dP/dx"<<endl;
     //- Caluclate flowrate at the outlet
-    label outletPatchID = mesh_.boundaryMesh().findPatchID(outletName_);
-    const polyPatch& outletpp = mesh_.boundaryMesh()[outletPatchID];
-    const surfaceScalarField& phi = mesh_.lookupObject<surfaceScalarField>("phi");
+    label outletPatchID = emesh_.mesh().boundaryMesh().findPatchID(outletName_);
+    const polyPatch& outletpp = emesh_.mesh().boundaryMesh()[outletPatchID];
+    const surfaceScalarField& phi = emesh_.mesh().lookupObject<surfaceScalarField>("phi");
 
     //- Mass flux at the outlet
     scalar massFluxCur = gSum(phi.boundaryField()[outletPatchID]);
@@ -134,19 +134,19 @@ void Foam::fixedRe::correctDPdx()
 Foam::volVectorField Foam::fixedRe::pressureField()
 {
     //- Update dPdx
-    if (mesh_.time().timeIndex() > 2) correctDPdx();
+    if (emesh_.mesh().time().timeIndex() > 2) correctDPdx();
 
     volVectorField gradP
     (
         IOobject
         (
             "gradP",
-            mesh_.time().timeName(),
-            mesh_,
+            emesh_.mesh().time().timeName(),
+            emesh_.mesh(),
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        mesh_,
+        emesh_.mesh(),
         dimensionedVector
         (
             "gradP", 
@@ -168,7 +168,7 @@ Foam::volVectorField Foam::fixedRe::pressureField()
             else if (flowDir_ == "curvedChannel")
             {
                 //- Assuming center of curve channel is (0 0 0)
-                vector position = mesh_.C()[celli];
+                vector position = emesh_.mesh().C()[celli];
                 vector flowDir = vector(-position.y(), position.x(), 0);
                 flowDir /= mag(flowDir);
                 gradP[celli] = dPdx_ * flowDir;

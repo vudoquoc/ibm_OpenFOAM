@@ -9,7 +9,6 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/autoPtr.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/GeometricField.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volMesh.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchField.H \
-$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H \
 lnInclude/eulerMesh.H \
 lnInclude/IBOStream.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/point.H \
@@ -34,6 +33,7 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatch.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/fieldTypes.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchField.C \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/calculatedFvPatchField.H \
+$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/vector.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/entry.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/IDLList.H \
@@ -503,7 +503,6 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/autoPtr.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/GeometricField.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volMesh.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchField.H :
-$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H :
 lnInclude/eulerMesh.H :
 lnInclude/IBOStream.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/point.H :
@@ -528,6 +527,7 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatch.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/fieldTypes.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvPatchField.C :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/calculatedFvPatchField.H :
+$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/vector.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/entry.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/IDLList.H :

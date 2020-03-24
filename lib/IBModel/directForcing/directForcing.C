@@ -21,14 +21,12 @@ namespace Foam
 
 Foam::directForcing::directForcing
 (
-	dynamicFvMesh& mesh,
     eulerMesh& emesh,
     const dictionary& dict,
     PtrList<IBObject>& ibo
 )
 :	
-	IBModel(mesh, emesh, dict, ibo),
-	mesh_(mesh),
+	IBModel(emesh, dict, ibo),
     emesh_(emesh),
     ibo_(ibo),
 	nMDF_(readScalar(dict.lookup("multiDirForcingIter")))
@@ -48,20 +46,19 @@ Foam::volVectorField Foam::directForcing::ibForce(const volVectorField& U)
         IOobject
         (
             "ibForce",
-            mesh_.time().timeName(),
-            mesh_,
+            emesh_.mesh().time().timeName(),
+            emesh_.mesh(),
             IOobject::NO_READ,
             IOobject::NO_WRITE
         ),
-        mesh_,
+        emesh_.mesh(),
         dimensionedVector("ibForce",
                 dimensionSet(0,1,-2,0,0,0,0), vector(0,0,0))
     );   
 
     if (ibo_.size() != 0)
     {
-        const scalar dT = mesh_.time().deltaTValue();
-
+        const scalar dT = emesh_.mesh().time().deltaTValue();
         for(int objI=0; objI<ibo_.size(); objI++)
         {
             IBObject& objectI = ibo_[objI];
@@ -80,7 +77,7 @@ Foam::volVectorField Foam::directForcing::ibForce(const volVectorField& U)
                     = 
                         deltaFunc
                         (
-                            mesh_.C()[objectI.neiCells()[pointI][cellI]], 
+                            emesh_.mesh().C()[objectI.neiCells()[pointI][cellI]], 
                             objectI.lPoints()[pointI]
                         );
                     
@@ -91,7 +88,7 @@ Foam::volVectorField Foam::directForcing::ibForce(const volVectorField& U)
                       * emesh_.dV();
                 }
 
-                if (mesh_.nGeometricD() == 2)
+                if (emesh_.mesh().nGeometricD() == 2)
                 {
                     ULagr[pointI].z() = 0;
                 }
@@ -108,7 +105,7 @@ Foam::volVectorField Foam::directForcing::ibForce(const volVectorField& U)
                     = 
                         deltaFunc
                         (
-                            mesh_.C()[objectI.neiCells()[pointI][cellI]], 
+                            emesh_.mesh().C()[objectI.neiCells()[pointI][cellI]], 
                             objectI.lPoints()[pointI]
                         );
                     

@@ -10,8 +10,7 @@
 #define flowCondition_H
 
 #include "dictionary.H"
-#include "dynamicFvMesh.H"
-
+#include "eulerMesh.H"
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 namespace Foam
@@ -30,21 +29,21 @@ public:
         flowCondition,
         dictionary,
         (
-            dynamicFvMesh& mesh,
+            eulerMesh& emesh,
             const dictionary& dict
         ),
-        (mesh, dict)
+        (emesh, dict)
     );
 
     flowCondition
     (
-        dynamicFvMesh& mesh,
+        eulerMesh& emesh,
         const dictionary& dict
     );
 
     static autoPtr<flowCondition> New  
     (
-        dynamicFvMesh& mesh,
+        eulerMesh& emesh,
         const dictionary& dict
     );
 

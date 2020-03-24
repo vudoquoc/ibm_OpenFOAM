@@ -23,12 +23,12 @@ void Foam::zeroPressureGradient::initiateDPdx()
 // ------------------------------- Constructor ----------------------------- //
 Foam::zeroPressureGradient::zeroPressureGradient
 (
-    dynamicFvMesh& m,
+    eulerMesh& m,
     const dictionary& dict
 )
 :
     flowCondition(m, dict), // bat buoc phai mang ten cua class ke thua cua no s
-    mesh_(m)
+    emesh_(m)
 {}
 
 // -----------------------------Member functions---------------------------- //
@@ -46,12 +46,12 @@ Foam::volVectorField Foam::zeroPressureGradient::pressureField()
         IOobject
         (
             "gradP",
-            mesh_.time().timeName(),
-            mesh_,
+            emesh_.mesh().time().timeName(),
+            emesh_.mesh(),
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        mesh_,
+        emesh_.mesh(),
         dimensionedVector
         (
             "gradP", 

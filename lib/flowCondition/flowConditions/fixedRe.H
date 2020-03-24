@@ -2,7 +2,6 @@
 #define fixedRe_H
 
 #include "flowCondition.H"
-#include "dynamicFvMesh.H"
 
 namespace Foam
 {
@@ -12,7 +11,7 @@ class fixedRe
     public flowCondition
 {
 
-    dynamicFvMesh& mesh_;
+    eulerMesh& emesh_;
 
     scalar Reynolds_;
     scalar dPdx_;
@@ -36,7 +35,7 @@ public:
     //- Constructor
         fixedRe
         (
-            dynamicFvMesh& mesh,
+            eulerMesh& emesh,
             const dictionary& dict
         );
 

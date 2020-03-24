@@ -56,6 +56,7 @@ public:
 			void updateEulerMeshInfo();
 
 		//- Access
+			inline dynamicFvMesh& mesh() {return mesh_;}
 			inline const scalar& rhoFluid() {return rhoFluid_;}
 			inline const vector& g() {return g_;}
 			inline scalar& h() {return h_;}			

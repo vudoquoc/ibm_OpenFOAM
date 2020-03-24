@@ -35,8 +35,6 @@ class newton
 :
 	public IBMotionSolver
 {
-	dynamicFvMesh& mesh_;
-
 	eulerMesh& emesh_;
 
 	PtrList<IBObject>& ibo_;
@@ -51,7 +49,6 @@ public:
 		newton
 		(
 			word typeName,
-			dynamicFvMesh& mesh, 
 			eulerMesh& emesh,
 			PtrList<IBObject>& ibo,
 			autoPtr<IBModel>& ibmodelPtr

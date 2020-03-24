@@ -10,7 +10,6 @@
 #define IBObject_H
 
 #include "point.H"
-#include "dynamicFvMesh.H"
 #include "autoPtr.H"
 #include "dictionary.H"
 #include "runTimeSelectionTables.H"
@@ -41,18 +40,16 @@ public:
 			dictionary,
 			(
 				const word& typeName,
-				dynamicFvMesh& mesh,
 				eulerMesh& emesh,
 				const dictionary& dict
 			),
-			(typeName, mesh, emesh, dict)
+			(typeName, emesh, dict)
 		);
 
 	//- Constructor
 		IBObject
 		(
 			const word& typeName,
-			dynamicFvMesh& mesh,
 			eulerMesh& emesh,
 			const dictionary& dict
 		);
@@ -61,7 +58,6 @@ public:
 		static autoPtr<IBObject> New 
 		(
 			const word& typeName,
-			dynamicFvMesh& mesh,
 			eulerMesh& emesh,
 			const dictionary& dict
 		);

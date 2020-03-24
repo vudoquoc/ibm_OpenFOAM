@@ -2,7 +2,6 @@
 #define zeroPressureGradient_H
 
 #include "flowCondition.H"
-#include "dynamicFvMesh.H"
 
 namespace Foam
 {
@@ -10,7 +9,7 @@ namespace Foam
 class zeroPressureGradient: public flowCondition
 {
 
-    dynamicFvMesh& mesh_;
+    eulerMesh& emesh_;
 
     bool addPressureGradientField_;
     
@@ -24,7 +23,7 @@ public:
     //- Constructor
         zeroPressureGradient
         (
-            dynamicFvMesh& mesh,
+            eulerMesh& emesh,
             const dictionary& dict
         );
 

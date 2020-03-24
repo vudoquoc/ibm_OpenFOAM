@@ -42,19 +42,17 @@ public:
 			dictionary,
 			(
 				word typeName,
-				dynamicFvMesh& mesh,
 				eulerMesh& emesh,
 				PtrList<IBObject>& ibo,
 				autoPtr<IBModel>& ibmodelPtr
 			),
-			(typeName, mesh, emesh, ibo, ibmodelPtr)
+			(typeName, emesh, ibo, ibmodelPtr)
 		);
 
 	//- Constructor
 		IBMotionSolver
 		(
 			word typeName,
-			dynamicFvMesh& mesh, 
 			eulerMesh& emesh,
 			PtrList<IBObject>& ibo,
 			autoPtr<IBModel>& ibmodelPtr
@@ -64,7 +62,6 @@ public:
 		static autoPtr<IBMotionSolver> New
 		(
 			word typeName,
-			dynamicFvMesh& mesh,
 			eulerMesh& emesh,
 			PtrList<IBObject>& ibo,
 			autoPtr<IBModel>& ibmodelPtr

@@ -20,13 +20,11 @@ namespace Foam
 
 Foam::IBModel::IBModel
 (
-	dynamicFvMesh& mesh,
     eulerMesh& emesh,
 	const dictionary& dict,
     PtrList<IBObject>& ibo
 )
 :
-	mesh_(mesh),
     emesh_(emesh)
 {}
 
@@ -37,7 +35,7 @@ Foam::scalar Foam::IBModel::deltaFunc(point p_Eul, point p_Lag)
     scalar deltaY = deltaFunc1D(p_Eul.y(), p_Lag.y());
     scalar deltaZ = deltaFunc1D(p_Eul.z(), p_Lag.z());
 
-    if (mesh_.nGeometricD() == 3)
+    if (emesh_.mesh().nGeometricD() == 3)
         return (deltaX*deltaY*deltaZ);
     else
         return (deltaX*deltaY);
@@ -68,7 +66,6 @@ Foam::scalar Foam::IBModel::deltaFunc1D(scalar x_Eul, scalar x_Lag)
 
 Foam::autoPtr<Foam::IBModel> Foam::IBModel::New
 (
-	dynamicFvMesh& mesh,
     eulerMesh& emesh,
 	const dictionary& dict,
     PtrList<IBObject>& ibo
@@ -93,7 +90,7 @@ Foam::autoPtr<Foam::IBModel> Foam::IBModel::New
 			<< exit(FatalError);
 	}
 	
-	return autoPtr<IBModel>(cstrIter()(mesh, emesh, dict, ibo));
+	return autoPtr<IBModel>(cstrIter()(emesh, dict, ibo));
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

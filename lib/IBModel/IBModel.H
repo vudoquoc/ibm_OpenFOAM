@@ -14,7 +14,6 @@
 #include "GeometricField.H"
 #include "volMesh.H"
 #include "fvPatchField.H"
-#include "dynamicFvMesh.H"
 #include "eulerMesh.H"
 #include "IBOStream.H"
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -28,8 +27,6 @@ namespace Foam
 class IBModel
 {
 	//- Private data
-	dynamicFvMesh& mesh_;
-	
 	eulerMesh& emesh_;
 
 	//- Disallow default bitwise copy construct
@@ -48,18 +45,16 @@ public:
 			IBModel,
 			dictionary,
 			(
-				dynamicFvMesh& mesh,
 				eulerMesh& emesh,
 				const dictionary& dict,
 				PtrList<IBObject>& ibo
 			),
-			(mesh, emesh, dict, ibo)
+			(emesh, dict, ibo)
 		);
 		
 	//- Constructor
 		IBModel
 		(
-			dynamicFvMesh& mesh,
 			eulerMesh& emesh,
 			const dictionary& dict,
 			PtrList<IBObject>& ibo
@@ -68,7 +63,6 @@ public:
 	//- Selector
 		static autoPtr<IBModel> New
 		(
-			dynamicFvMesh& mesh,
 			eulerMesh& emesh,
 			const dictionary& dict,
 			PtrList<IBObject>& ibo

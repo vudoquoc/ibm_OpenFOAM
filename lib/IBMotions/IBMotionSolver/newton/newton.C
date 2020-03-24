@@ -22,14 +22,12 @@ namespace Foam
 Foam::newton::newton
 (
     word typeName,
-	dynamicFvMesh& mesh,
     eulerMesh& emesh,
     PtrList<IBObject>& ibo,
     autoPtr<IBModel>& ibmodelPtr
 )
 :
-    IBMotionSolver(typeName, mesh, emesh, ibo, ibmodelPtr),
-	mesh_(mesh),
+    IBMotionSolver(typeName, emesh, ibo, ibmodelPtr),
     emesh_(emesh),
     ibo_(ibo),
     ibmodelPtr_(ibmodelPtr)

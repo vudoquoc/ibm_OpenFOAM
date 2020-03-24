@@ -18,12 +18,12 @@ namespace Foam
 // ------------------------------- Constructor ----------------------------- //
 Foam::fixedDP::fixedDP
 (
-    dynamicFvMesh& mesh,
+    eulerMesh& emesh,
     const dictionary& dict
 )
 :
-    flowCondition(mesh, dict),
-    mesh_(mesh),
+    flowCondition(emesh, dict),
+    emesh_(emesh),
     dPdx_(readScalar(dict.lookup("dPdx"))),
     flowDir_(dict.lookup("flowDirection"))
 {}
@@ -41,12 +41,12 @@ Foam::volVectorField Foam::fixedDP::pressureField()
         IOobject
         (
             "gradP",
-            mesh_.time().timeName(),
-            mesh_,
+            emesh_.mesh().time().timeName(),
+            emesh_.mesh(),
             IOobject::NO_READ,
             IOobject::NO_WRITE
         ),
-        mesh_,
+        emesh_.mesh(),
         dimensionedVector
         (
             "gradP", 
@@ -66,7 +66,7 @@ Foam::volVectorField Foam::fixedDP::pressureField()
         else if (flowDir_ == "curvedChannel")
         {
             //- Assuming center of curve channel is (0 0 0)
-            vector position = mesh_.C()[celli];
+            vector position = emesh_.mesh().C()[celli];
             vector flowDir = vector(-position.y(), position.x(), 0);
             flowDir /= mag(flowDir);
             gradP[celli] = dPdx_ * flowDir;

@@ -22,7 +22,6 @@ namespace Foam
 Foam::IBObject::IBObject
 (
 	const word& typeName,
-	dynamicFvMesh& mesh,
 	eulerMesh& emesh,
 	const dictionary& dict
 )
@@ -33,7 +32,6 @@ Foam::IBObject::IBObject
 Foam::autoPtr<Foam::IBObject> Foam::IBObject::New
 (
 	const word& typeName,
-	dynamicFvMesh& mesh,
 	eulerMesh& emesh,
 	const dictionary& dict
 )
@@ -45,7 +43,7 @@ Foam::autoPtr<Foam::IBObject> Foam::IBObject::New
 	{
 		FatalErrorIn
 		(
-			"IBObject::New(const dynamicFvMesh& mesh, "
+			"IBObject::New(const eulerMesh& emesh, "
 			"const word& name, const dictionary& dict)"
 		)	<< "Unknown object type "<< typeName 
 			<< endl
@@ -54,7 +52,7 @@ Foam::autoPtr<Foam::IBObject> Foam::IBObject::New
 			<<exit(FatalError);
 	}
 
-	return autoPtr<IBObject>(dictCstrIter()(typeName, mesh, emesh, dict));
+	return autoPtr<IBObject>(dictCstrIter()(typeName, emesh, dict));
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

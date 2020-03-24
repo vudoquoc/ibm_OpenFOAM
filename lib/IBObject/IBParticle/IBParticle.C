@@ -37,7 +37,7 @@ void Foam::IBParticle::initialize(const dictionary& dict)
         epsilonP_ = readScalar(dict.lookup("epsilonP"));
     }
 
-    if(mesh_.nGeometricD() == 2)
+    if(emesh_.mesh().nGeometricD() == 2)
     {
         V_ = PI*R_*R_;
 
@@ -134,7 +134,7 @@ void Foam::IBParticle::calcNLagrangPoints()
 {
     scalar idealNPoints(0.0);
 
-    if (mesh_.nGeometricD() == 2)
+    if (emesh_.mesh().nGeometricD() == 2)
     {
         idealNPoints = 2.0*PI*R_/emesh_.h();
         nPoints_ = static_cast<int> (idealNPoints + 0.5);
@@ -349,14 +349,12 @@ void Foam::IBParticle::addMotions(const dictionary& dict)
 Foam::IBParticle::IBParticle
 (	
 	const word& typeName,
-    dynamicFvMesh& mesh,
     eulerMesh& emesh,
     const dictionary& dict
 )
 :
-	IBObject(typeName, mesh, emesh, dict),
+	IBObject(typeName, emesh, dict),
 	PI(3.14159265359),
-    mesh_(mesh),
     emesh_(emesh),
     name_(dict.lookup("name")),
     objectType_(typeName),
@@ -399,20 +397,20 @@ void Foam::IBParticle::findNeiCells()
         IOobject
         (
             "neighbourCells",
-            mesh_.time().timeName(),
-            mesh_,
+            emesh_.mesh().time().timeName(),
+            emesh_.mesh(),
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        mesh_,
+        emesh_.mesh(),
         dimensionedScalar("neighbourCells", dimless, 0)
     );
 
     forAll(lPoints_, pointI)
     {
-        forAll(mesh_.C(), cellI)
+        forAll(emesh_.mesh().C(), cellI)
         { 
-            scalar cellToLpoint = mag(mesh_.C()[cellI] - lPoints_[pointI]);
+            scalar cellToLpoint = mag(emesh_.mesh().C()[cellI] - lPoints_[pointI]);
             
             scalar span = 2.0*emesh_.h();
             
@@ -424,7 +422,7 @@ void Foam::IBParticle::findNeiCells()
         }
     }
 
-    if (mesh_.time().timeIndex() == 0 || mesh_.time().outputTime())
+    if (emesh_.mesh().time().timeIndex() == 0 || emesh_.mesh().time().outputTime())
     {
         neighbourCells.write();
     }
@@ -439,18 +437,18 @@ void Foam::IBParticle::findSolidCells()
         IOobject
         (
             "sldCells",
-            mesh_.time().timeName(),
-            mesh_,
+            emesh_.mesh().time().timeName(),
+            emesh_.mesh(),
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        mesh_,
+        emesh_.mesh(),
         dimensionedScalar("sldCells", dimless, 0)
     );
 
-    forAll(mesh_.C(), cellI)
+    forAll(emesh_.mesh().C(), cellI)
     { 
-        scalar dR = mag(mesh_.C()[cellI] - center_);
+        scalar dR = mag(emesh_.mesh().C()[cellI] - center_);
         //- not very effective!
         
         if (dR <= R_)
@@ -460,7 +458,7 @@ void Foam::IBParticle::findSolidCells()
         }
     }
 
-    if (mesh_.time().timeIndex() == 0 || mesh_.time().outputTime())
+    if (emesh_.mesh().time().timeIndex() == 0 || emesh_.mesh().time().outputTime())
     {
         sldCells.write();
     }
@@ -476,18 +474,18 @@ void Foam::IBParticle::findSolidCellsExt()
         IOobject
         (
             "sldCellsExt",
-            mesh_.time().timeName(),
-            mesh_,
+            emesh_.mesh().time().timeName(),
+            emesh_.mesh(),
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        mesh_,
+        emesh_.mesh(),
         dimensionedScalar("sldCellsExt", dimless, 0)
     );
 
-    forAll(mesh_.C(), cellI)
+    forAll(emesh_.mesh().C(), cellI)
     { 
-        scalar dR = mag(mesh_.C()[cellI] - center_);
+        scalar dR = mag(emesh_.mesh().C()[cellI] - center_);
         //- not very effective!
         
         if (dR <= (R_ + 2.0*emesh_.h()))
@@ -497,7 +495,7 @@ void Foam::IBParticle::findSolidCellsExt()
         }
     }
 
-    if (mesh_.time().timeIndex() == 0 || mesh_.time().outputTime())
+    if (emesh_.mesh().time().timeIndex() == 0 || emesh_.mesh().time().outputTime())
     {
         sldCellsExt.write();
     }
@@ -642,7 +640,7 @@ void Foam::IBParticle::updateObjectMotionUhlmann
             sixDoFMotion& sDoF = refCast<sixDoFMotion>(motions_[i]);
             sDoF.updateMotion
             (
-                mesh_,
+                emesh_.mesh(),
                 ForceLagrang,
                 repulsiveForce,
                 rhoFluid,
@@ -672,7 +670,7 @@ void Foam::IBParticle::updateObjectMotionTobias
             sixDoFMotion& sDoF = refCast<sixDoFMotion>(motions_[i]);
             sDoF.updateMotion
             (
-                mesh_,
+                emesh_.mesh(),
                 ForceLagrang,
                 repulsiveForce,
                 rhoFluid,
@@ -716,7 +714,7 @@ void Foam::IBParticle::movePoints()
     if (movable_)
     {
         
-        const scalar dT = mesh_.time().deltaTValue();
+        const scalar dT = emesh_.mesh().time().deltaTValue();
 
         center_ += dT*uTranslate_;
 
@@ -744,10 +742,10 @@ const Foam::vector Foam::IBParticle::wallRepulsiveForce()
 
     if(calcWallRepulsive_)
     {
-        forAll(mesh_.boundary(), patchI)
+        forAll(emesh_.mesh().boundary(), patchI)
         {
-            const polyPatch& pp = mesh_.boundaryMesh()[patchI];
-            if(mesh_.boundary()[patchI].Cf().size() == 0)
+            const polyPatch& pp = emesh_.mesh().boundaryMesh()[patchI];
+            if(emesh_.mesh().boundary()[patchI].Cf().size() == 0)
             {
                 continue;
             }
@@ -773,7 +771,7 @@ const Foam::vector Foam::IBParticle::wallRepulsiveForce()
                     const vector fcn = fc[nearestFace];
 
                 //- Surface area vector of the nearest face           
-                    vector Sf_ = mesh_.boundary()[patchI].Sf()[nearestFace];
+                    vector Sf_ = emesh_.mesh().boundary()[patchI].Sf()[nearestFace];
 
                 //- Normal vector of the nearest face
                     vector nf_ = Sf_/mag(Sf_);

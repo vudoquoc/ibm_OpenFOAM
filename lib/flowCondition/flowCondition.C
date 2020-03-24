@@ -20,7 +20,7 @@ namespace Foam
 
 Foam::flowCondition::flowCondition
 (
-    dynamicFvMesh& mesh,
+    eulerMesh& emesh,
     const dictionary& dict 
 )
 {}
@@ -29,7 +29,7 @@ Foam::flowCondition::flowCondition
 
 Foam::autoPtr<Foam::flowCondition> Foam::flowCondition::New
 (
-	dynamicFvMesh& mesh,
+	eulerMesh& emesh,
 	const dictionary& dict
 )
 {
@@ -44,13 +44,13 @@ Foam::autoPtr<Foam::flowCondition> Foam::flowCondition::New
 	{
 		FatalErrorIn
 		(
-			"flowCondition::New(dynamicFvMesh& mesh, const dictionary& dict)"
+			"flowCondition::New(eulerMesh& mesh, const dictionary& dict)"
 		)	<< "Unknown approaching method "<< typeName <<endl <<endl
 			<< "Valid approaching method are : " <<endl
 			<< dictionaryConstructorTablePtr_->toc()
 			<< exit(FatalError);
 	}
 	
-	return autoPtr<flowCondition>(cstrIter()(mesh, dict));
+	return autoPtr<flowCondition>(cstrIter()(emesh, dict));
 }
 

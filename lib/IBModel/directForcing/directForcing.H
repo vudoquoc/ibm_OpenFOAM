@@ -25,8 +25,6 @@ class directForcing
 	public IBModel
 {
 	//- Private data
-		//- Reference to mesh
-		dynamicFvMesh& mesh_;
 		
 		//- Reference to euler mesh
 		eulerMesh& emesh_;
@@ -56,7 +54,6 @@ public:
 	//- Constructor
 		directForcing
 		(
-			dynamicFvMesh& mesh,
 			eulerMesh& emesh,
 			const dictionary& dict,
 			PtrList<IBObject>& ibo

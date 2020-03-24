@@ -7,7 +7,6 @@ lnInclude/IBMotion.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/wallPolyPatch.H \
 lnInclude/sixDoFMotion.H \
-$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H \
 lnInclude/IBObject.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Istream.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Ostream.H \
@@ -68,6 +67,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/fileName.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/ITstream.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/wordList.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dictionaryTemplates.C \
+$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/GeometricField.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/char.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/bool.H \
@@ -524,7 +524,6 @@ lnInclude/IBMotion.H :
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/wallPolyPatch.H :
 lnInclude/sixDoFMotion.H :
-$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H :
 lnInclude/IBObject.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Istream.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/Ostream.H :
@@ -585,6 +584,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/fileName.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/ITstream.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/wordList.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dictionaryTemplates.C :
+$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/GeometricField.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/char.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/bool.H :

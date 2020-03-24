@@ -7,7 +7,6 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/messageStream.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/errorManip.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/point.H \
-$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/autoPtr.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dictionary.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/runTimeSelectionTables.H \
@@ -44,6 +43,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/wordList.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/className.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dictionaryTemplates.C \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/token.H \
+$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/IOobject.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/typeInfo.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/OSspecific.H \
@@ -519,7 +519,6 @@ $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volFields.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/messageStream.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/errorManip.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/point.H :
-$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/autoPtr.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dictionary.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/runTimeSelectionTables.H :
@@ -556,6 +555,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/wordList.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/className.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/dictionaryTemplates.C :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/token.H :
+$(WM_PROJECT_DIR)/src/dynamicFvMesh/lnInclude/dynamicFvMesh.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/IOobject.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/typeInfo.H :
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/OSspecific.H :

@@ -30,9 +30,6 @@ class immersedBoundaryMethod
 {
 	// Private data
 
-		//- Reference to fvMesh
-		dynamicFvMesh& mesh_;
-
 		//- Euler mesh including cell size, cell volume, rho fluid, ...
 		eulerMesh emesh_;
 
