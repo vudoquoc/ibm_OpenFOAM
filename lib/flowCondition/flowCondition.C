@@ -2,8 +2,8 @@
        +===   /===\  ==   ===   Hanoi University of Science and Technology
        ||  \\     \\ ||  //     School of Transportation Engineering
        ||   ))     )) | //      Computational Engineering Group
-       ||  //    \\/  |//       IBMlibs - IBModel class
-       +===   \===\\ =//        OpenFOAM 5.0 - 13/4/2018
+       ||  //    \\/  |//       flowCondition class
+       +===   \===\\ =//        OpenFOAM 6.0
 \*---------------------------------------------------------------------------*/
 
 #include "flowCondition.H"

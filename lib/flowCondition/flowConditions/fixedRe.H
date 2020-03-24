@@ -1,3 +1,11 @@
+/*---------------------------------------------------------------------------*\
+       +===   /===\  ==   ===   Hanoi University of Science and Technology
+       ||  \\     \\ ||  //     School of Transportation Engineering
+       ||   ))     )) | //      Computational Engineering Group
+       ||  //    \\/  |//       fixedRe class
+       +===   \===\\ =//        OpenFOAM 6.0
+\*---------------------------------------------------------------------------*/
+
 #ifndef fixedRe_H
 #define fixedRe_H
 

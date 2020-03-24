@@ -2,8 +2,8 @@
        +===   /===\  ==   ===   Hanoi University of Science and Technology
        ||  \\     \\ ||  //     School of Transportation Engineering
        ||   ))     )) | //      Computational Engineering Group
-       ||  //    \\/  |//       IBMlibs - immersedBoundaryMethod class
-       +===   \===\\ =//        OpenFOAM 5.0 - 13/4/2018
+       ||  //    \\/  |//       immersedBoundaryMethod class
+       +===   \===\\ =//        OpenFOAM 6.0
 \*---------------------------------------------------------------------------*/
 
 #ifndef immersedBoundaryMethod_H

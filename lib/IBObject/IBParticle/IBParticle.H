@@ -2,8 +2,8 @@
        +===   /===\  ==   ===   Hanoi University of Science and Technology
        ||  \\     \\ ||  //     School of Transportation Engineering
        ||   ))     )) | //      Computational Engineering Group
-       ||  //    \\/  |//       IBMlibs - IBParticles class
-       +===   \===\\ =//        OpenFOAM 5.0 - 13/4/2018
+       ||  //    \\/  |//       IBParticles class
+       +===   \===\\ =//        OpenFOAM 6.0
 \*---------------------------------------------------------------------------*/
 
 #ifndef IBParticle_H

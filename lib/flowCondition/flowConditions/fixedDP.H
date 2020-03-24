@@ -1,3 +1,11 @@
+/*---------------------------------------------------------------------------*\
+       +===   /===\  ==   ===   Hanoi University of Science and Technology
+       ||  \\     \\ ||  //     School of Transportation Engineering
+       ||   ))     )) | //      Computational Engineering Group
+       ||  //    \\/  |//       fixedDP class
+       +===   \===\\ =//        OpenFOAM 6.0
+\*---------------------------------------------------------------------------*/
+
 #ifndef fixedDP_H
 #define fixedDP_H
 
